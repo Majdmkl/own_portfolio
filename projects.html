@@ -238,6 +238,13 @@
       <a href="https://www.linkedin.com/in/majid-makhoul-b61232289/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
     </div>
   </footer>
+  <!-- IMAGE LIGHTBOX -->
+  <div class="img-lightbox" id="imgLightbox">
+    <button class="img-lightbox__close" id="lbClose">✕</button>
+    <img id="lbImg" src="" alt="">
+    <span class="img-lightbox__caption" id="lbCaption"></span>
+  </div>
+
   <script>
     const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
@@ -245,6 +252,22 @@
     document.querySelectorAll('.video-card').forEach(c=>{c.addEventListener('click',()=>{const id=c.dataset.modal;document.getElementById(id).classList.add('open');document.getElementById(id).querySelector('video').play();});});
     document.querySelectorAll('.modal-close').forEach(b=>{b.addEventListener('click',()=>{const o=document.getElementById(b.dataset.close);o.classList.remove('open');o.querySelector('video').pause();o.querySelector('video').currentTime=0;});});
     document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o){o.classList.remove('open');o.querySelector('video').pause();o.querySelector('video').currentTime=0;}});});
+
+    // IMAGE LIGHTBOX
+    const lb = document.getElementById('imgLightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCaption');
+    document.getElementById('lbClose').addEventListener('click', () => lb.classList.remove('open'));
+    lb.addEventListener('click', e => { if(e.target === lb) lb.classList.remove('open'); });
+    document.querySelectorAll('.other-card__imgs img').forEach(img => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = img.alt;
+        lb.classList.add('open');
+      });
+    });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') lb.classList.remove('open'); });
   </script>
 </body>
 </html>
