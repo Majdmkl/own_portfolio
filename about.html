@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Majid Makhoul</title>
+
+  <!-- Font Awesome för ikoner (GitHub/LinkedIn) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- samma bakgrund som index -->
+  <div id="tsparticles-about"></div>
+
+  <header>
+    <div class="logo"><a href="index.html">mmakhoul.com</a></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="about-wrap">
+    <section class="about-card">
+      <h1>👋 About Me</h1>
+      <p>
+        Hi! I’m <b>Majid Makhoul</b>, a Computer Science and 
+        Engineering student passionate about creating impactful 
+        solutions through technology and software development.
+        I also have a strong interest in finance, particularly in 
+        understanding markets and investment strategies. 
+        Alongside developing my expertise in both areas, I am inspired 
+        by how technology and finance can intersect to drive innovation and sustainable growth.
+      </p>
+
+      <div class="about-grid">
+        <div>
+          <h3>🎓 Education</h3>
+          <ul>
+            <li>Bachelor’s in Computer Science & Engineering – <em>KTH</em></li>
+            <li>Bachelor’s in Business Administration – <em>Stockholm University</em></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>💼 Work Experience</h3>
+          <ul>
+            <li>ICA Maxi – Sales & Cashier</li>
+            <li>Stockholm Live Catering AB – Teamleader</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>⚡ Skills</h3>
+      <div class="skills-pills">
+        <span>Java</span>
+        <span>Python</span>
+        <span>C / C++</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>Git</span>
+        <span>MongoDB</span>
+        <span>MySQL</span>
+        <span>Cisco</span>
+        <span>Finance</span>
+      </div>
+
+      <div class="social-cta">
+        <p>Want to connect with me?</p>
+        <div class="social-links">
+          <a href="https://github.com/Majdmkl" target="_blank" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/majid-makhoul-b61232289/" target="_blank" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
+      <div class="contact-btn">
+        <a href="contact.html">Contact Me</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- tsParticles (samma config som index) -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script>
+    tsParticles.load("tsparticles-about", {
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 80 },
+        color: { value: ["#FFD700", "#FFFFFF", "#00C6FF"] },
+        shape: { type: "circle" },
+        opacity: { value: 0.8 },
+        size: { value: { min: 1, max: 4 } },
+        links: {
+          enable: true, distance: 150, color: "#888", opacity: 0.4, width: 1
+        },
+        move: { enable: true, speed: 1.5, direction: "none", outModes: { default: "bounce" } }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" }
+        },
+        modes: { repulse: { distance: 100 }, push: { quantity: 4 } }
+      }
+    });
+  </script>
+</body>
+</html>

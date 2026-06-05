@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects - Majid Makhoul</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome for GitHub icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Additional styling for the new structure while keeping original theme */
+    
+    /* Featured Videos Section - sits at top, separate from other projects */
+    .featured-videos {
+      margin: 2rem 0 3rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .featured-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #00d9ff;
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2.5rem;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    .video-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .video-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+      border-color: rgba(0, 217, 255, 0.5);
+    }
+
+    .video-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .video-item p {
+      margin-bottom: 1rem;
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    .video-thumbnail-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      max-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    .video-item img {
+      width: 100%;
+      height: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .video-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+      pointer-events: none;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .video-item:hover .play-overlay {
+      font-size: 4rem;
+      text-shadow: 0 0 30px rgba(0, 217, 255, 1);
+    }
+
+    /* Section divider for "Other Projects" */
+    .projects-divider {
+      text-align: center;
+      margin: 3rem 0 2rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+
+    /* Keep original projects-grid styling but ensure it works with new structure */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 2rem auto 0;
+      max-width: 1100px;
+      justify-items: center;
+    }
+
+    .project-item {
+      width: 100%;
+      max-width: 350px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .videos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .play-overlay {
+        font-size: 2.5rem;
+      }
+      
+      .video-item:hover .play-overlay {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><a href="index.html">mmakhoul.com</a></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="projects-page">
+    <h2>🚀 My Projects</h2>
+
+    <!-- Featured Videos Section - At the top, separate -->
+    <div class="featured-videos">
+      <div class="featured-title">🎥 Featured Video Demos</div>
+      <div class="videos-grid">
+        
+        <!-- WhatsNext Video -->
+        <div class="video-item video-thumb-1">
+          <h3>🎥 WhatsNext</h3>
+          <p><b>Click to watch</b> a short demo showcasing my app.</p>
+          <div class="video-thumbnail-wrapper">
+            <img src="whatsnext.png" alt="WhatsNext Thumbnail">
+            <div class="play-overlay">▶</div>
+          </div>
+        </div>
+
+        <!-- Safari Delivery Game Video -->
+        <div class="video-item video-thumb-2">
+          <h3>🎥 Demo Video</h3>
+          <p><b>Click to watch</b> a short demo showcasing my online game in action.</p>
+          <div class="video-thumbnail-wrapper">
+            <img src="startMenyn.png" alt="Game Video Thumbnail">
+            <div class="play-overlay">▶</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Divider for other projects -->
+    <div class="projects-divider">
+      Other Projects
+    </div>
+
+    <!-- Other Projects Grid -->
+    <div class="projects-grid">
+      
+      <!-- Bluetooth Movement Elevation -->
+      <div class="project-item">
+        <h3>📡 Bluetooth Movement Elevation</h3>
+        <p>A mobile app that connects to Movesense sensors via Bluetooth to measure and visualize movement and elevation data in real-time.</p>
+        <img src="IMG_1229.PNG" alt="Bluetooth Movement Elevation Screenshot 1">
+        <img src="IMG_1183.PNG" alt="Bluetooth Movement Elevation Screenshot 2">
+      </div>
+
+      <!-- SMHI API App -->
+      <div class="project-item">
+        <h3>🌤️ SMHI Weather API App</h3>
+        <p>A weather application that integrates with SMHI's API to provide real-time weather forecasts and meteorological data for different locations.</p>
+        <img src="SMHI1.png" alt="SMHI Weather App Screenshot 1">
+        <img src="SMHI2.png" alt="SMHI Weather App Screenshot 2">
+      </div>
+
+      <!-- Project 3 - Sudoku -->
+      <div class="project-item">
+        <h3>🧩 Sudoku Game</h3>
+        <p>A Sudoku game with multiple levels, error detection, and validation.</p>
+        <img src="Sud.png" alt="Sudoku Screenshot 1">
+        <img src="Sud1.png" alt="Sudoku Screenshot 2">
+        <img src="Sud2.png" alt="Sudoku Screenshot 3">
+      </div>
+
+      <!-- Project 4 - Chatbot -->
+      <div class="project-item">
+        <h3>🤖 AI Chatbot</h3>
+        <p>An interactive chatbot built with Java.</p>
+        <img src="Chatbot.png" alt="Chatbot Screenshot">
+      </div>
+
+      <!-- Project 5 - Data Management -->
+      <div class="project-item">
+        <h3>📚 Data Management System</h3>
+        <p>A database project for managing books with search, add and rating functions.</p>
+        <img src="Data2.png" alt="Data App Screenshot">
+        <img src="DataList.png" alt="Data List Screenshot">
+      </div>
+
+    </div>
+
+    <!-- GitHub link with icon -->
+    <div class="github-link">
+      <p>If you want to explore more projects in depth:</p>
+      <a href="https://github.com/Majdmkl" target="_blank" class="github-icon">
+        <i class="fab fa-github fa-3x"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Modal for WhatsNext video -->
+  <div id="videoModal1" class="modal">
+    <span class="close1">&times;</span>
+    <video controls id="modalVideo1">
+      <source src="whatsnext.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Modal for Safari Delivery Game video -->
+  <div id="videoModal2" class="modal">
+    <span class="close2">&times;</span>
+    <video controls id="modalVideo2">
+      <source src="projekt1_film.MP4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <script>
+    // Get modal elements for first video (WhatsNext)
+    const modal1 = document.getElementById("videoModal1");
+    const videoThumb1 = document.querySelector(".video-thumb-1");
+    const closeBtn1 = document.querySelector(".close1");
+    const modalVideo1 = document.getElementById("modalVideo1");
+
+    // Get modal elements for second video (Safari Delivery)
+    const modal2 = document.getElementById("videoModal2");
+    const videoThumb2 = document.querySelector(".video-thumb-2");
+    const closeBtn2 = document.querySelector(".close2");
+    const modalVideo2 = document.getElementById("modalVideo2");
+
+    // First video click handler
+    videoThumb1.addEventListener('click', () => {
+      modal1.style.display = "flex";
+      modalVideo1.play();
+    });
+
+    // Close first modal
+    closeBtn1.addEventListener('click', () => {
+      modal1.style.display = "none";
+      modalVideo1.pause();
+      modalVideo1.currentTime = 0;
+    });
+
+    // Second video click handler
+    videoThumb2.addEventListener('click', () => {
+      modal2.style.display = "flex";
+      modalVideo2.play();
+    });
+
+    // Close second modal
+    closeBtn2.addEventListener('click', () => {
+      modal2.style.display = "none";
+      modalVideo2.pause();
+      modalVideo2.currentTime = 0;
+    });
+
+    // Close when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === modal1) {
+        modal1.style.display = "none";
+        modalVideo1.pause();
+        modalVideo1.currentTime = 0;
+      }
+      if (e.target === modal2) {
+        modal2.style.display = "none";
+        modalVideo2.pause();
+        modalVideo2.currentTime = 0;
+      }
+    });
+
+    // Prevent clicks on video from closing modal
+    modalVideo1.addEventListener('click', (e) => e.stopPropagation());
+    modalVideo2.addEventListener('click', (e) => e.stopPropagation());
+  </script>
+</body>
+</html>

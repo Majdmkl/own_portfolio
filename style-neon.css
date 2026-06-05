@@ -1,0 +1,163 @@
+/* === BAS === */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background: #000; /* 🔥 svart bakgrund */
+    overflow-x: hidden;
+  }
+  
+  /* Canvas för stjärnor */
+  #stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: #000;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  header .logo {
+    color: cyan;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hero h2 span {
+    color: orange;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 20px;
+    border: 1px solid;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  
+  .btn.pink {
+    background: hotpink;
+    border-color: hotpink;
+    color: #fff;
+  }
+  
+  .btn.cyan {
+    background: transparent;
+    border-color: cyan;
+    color: cyan;
+  }
+  
+  .btn:hover {
+    transform: scale(1.1);
+  }
+  
+  /* === SKILLS === */
+  .skills-section {
+    padding: 80px 20px;
+    text-align: center;
+  }
+  
+  .skills-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #ff00ff;
+  }
+  
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .skills span {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #ff00ff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    color: #fff;
+    transition: 0.3s;
+  }
+  
+  .skills span:hover {
+    background: #ff00ff;
+    color: #000;
+    transform: scale(1.1);
+  }
+  
+  /* === PROJECTS === */
+  .projects-section {
+    padding: 80px 20px;
+    text-align: center;
+  }
+  
+  .projects-section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #00f5ff;
+  }
+  
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  .project-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    padding: 25px;
+    border-radius: 15px;
+    transition: 0.3s;
+  }
+  
+  .project-card h3 {
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  
+  .project-card p {
+    color: #ccc;
+  }
+  
+  .project-card:hover {
+    border-color: #00f5ff;
+    box-shadow: 0 0 20px #00f5ff;
+    transform: translateY(-5px);
+  }
+  
