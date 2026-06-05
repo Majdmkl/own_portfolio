@@ -11,137 +11,136 @@
   <link rel="stylesheet" href="style.css"/>
 
   <style>
-    /* ── SPOTLIGHT (follows mouse across whole page) ── */
-    #spotlight {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background: radial-gradient(600px circle at var(--mx,50%) var(--my,50%),
-        rgba(232,115,58,0.07) 0%, transparent 60%);
-      transition: background 0.1s;
-    }
-
-    /* ── NOISE OVERLAY ── */
+    /* NOISE */
     body::before {
-      content: '';
-      position: fixed; inset: 0; pointer-events: none; z-index: 1;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:1;
+      opacity:0.025;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ── TYPING CURSOR ── */
-    .type-cursor {
-      display: inline-block;
-      width: 3px; height: 0.85em;
-      background: var(--accent);
-      margin-left: 4px;
-      vertical-align: middle;
-      animation: cursorBlink 0.9s step-end infinite;
-      border-radius: 2px;
-    }
-    @keyframes cursorBlink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    /* ── MAGNETIC BUTTON WRAPPER ── */
-    .btn-magnetic { display: inline-block; }
-
-    /* ── SERVICE CARD TILT (3D) ── */
-    .service-card {
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    /* ── STATS — animated progress arc ── */
-    .stat-arc-wrap {
-      position: relative;
-      width: 72px; height: 72px;
-      margin: 0 auto 0.8rem;
-    }
-    .stat-arc-wrap svg { transform: rotate(-90deg); }
-    .stat-arc-circle {
-      fill: none;
-      stroke: rgba(232,115,58,0.15);
-      stroke-width: 3;
-    }
-    .stat-arc-progress {
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-dasharray: 188;
-      stroke-dashoffset: 188;
-      transition: stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1);
-    }
-    .stat-arc-wrap .stat-num-inner {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-head);
-      font-weight: 800; font-size: 1.1rem;
-      color: var(--accent); letter-spacing: -0.03em;
-    }
-
-    /* ── SKILL ROW — expand to show tag on hover ── */
-    .skill-row__tag {
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--accent);
-      opacity: 0; transform: translateX(8px);
-      transition: opacity 0.3s, transform 0.3s;
-      pointer-events: none;
-    }
-    .skill-row:hover .skill-row__tag { opacity: 1; transform: translateX(0); }
-
-    /* ── PROJECT ROW — preview image peek ── */
-    .project-row__preview {
-      position: absolute; right: 5rem; top: 50%; transform: translateY(-50%) scale(0.85);
-      width: 160px; height: 90px;
-      border-radius: 10px; overflow: hidden;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.35s, transform 0.35s cubic-bezier(0.22,1,0.36,1);
-      z-index: 10; border: 1px solid var(--border-h);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-    }
-    .project-row__preview img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .project-row:hover .project-row__preview {
-      opacity: 1; transform: translateY(-50%) scale(1);
-    }
-
-    /* ── SCROLL PROGRESS BAR ── */
+    /* SCROLL PROGRESS */
     #scroll-progress {
-      position: fixed; top: 0; left: 0; height: 2px; z-index: 9999;
-      background: linear-gradient(90deg, var(--accent), var(--accent-warm));
-      width: 0%; transition: width 0.1s linear;
-      border-radius: 0 2px 2px 0;
+      position:fixed; top:0; left:0; height:2px; z-index:9999;
+      background:linear-gradient(90deg,var(--accent),var(--accent-warm));
+      width:0%; border-radius:0 2px 2px 0; pointer-events:none;
     }
+    /* TYPING CURSOR */
+    .type-cursor {
+      display:inline-block; width:3px; height:0.82em;
+      background:var(--accent); margin-left:4px; vertical-align:middle;
+      animation:cursorBlink 0.9s step-end infinite; border-radius:2px;
+    }
+    @keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
 
-    /* ── MARQUEE reverse second row ── */
-    .marquee-bar--rev .marquee-bar__track { animation-direction: reverse; }
-    .marquee-bar--rev { background: var(--bg-2); border-top: 1px solid var(--border); }
-    .marquee-bar--rev .marquee-bar__track span { color: var(--muted); }
-    .marquee-bar--rev .marquee-bar__track span.dot { opacity: 0.2; }
+    /* MAGNETIC */
+    .btn-magnetic{display:inline-block;}
 
-    /* ── CONTACT ORB INTERACTIVE ── */
-    .contact-cta__orb { transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+    /* SERVICE CARD TILT */
+    .service-card{transform-style:preserve-3d;will-change:transform;}
 
-    /* ── FOOTER EASTER EGG ── */
-    .footer-egg {
-      font-size: 0.75rem; color: var(--muted);
-      opacity: 0; transition: opacity 0.4s;
+    /* STAT ARC */
+    .stat-arc-wrap{position:relative;width:72px;height:72px;margin:0 auto 0.8rem;}
+    .stat-arc-wrap svg{transform:rotate(-90deg);}
+    .stat-arc-circle{fill:none;stroke:rgba(232,115,58,0.15);stroke-width:3;}
+    .stat-arc-progress{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-dasharray:188;stroke-dashoffset:188;transition:stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1);}
+    .stat-arc-wrap .stat-num-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--accent);letter-spacing:-0.03em;}
+
+    /* SKILL TAG */
+    .skill-row__tag{font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);opacity:0;transform:translateX(8px);transition:opacity 0.3s,transform 0.3s;pointer-events:none;}
+    .skill-row:hover .skill-row__tag{opacity:1;transform:translateX(0);}
+
+    /* PROJECT PREVIEW */
+    .project-row__preview{position:absolute;right:5rem;top:50%;transform:translateY(-50%) scale(0.85);width:160px;height:90px;border-radius:10px;overflow:hidden;opacity:0;pointer-events:none;transition:opacity 0.35s,transform 0.35s cubic-bezier(0.22,1,0.36,1);z-index:10;border:1px solid var(--border-h);box-shadow:0 16px 40px rgba(0,0,0,0.5);}
+    .project-row__preview img{width:100%;height:100%;object-fit:cover;}
+    .project-row:hover .project-row__preview{opacity:1;transform:translateY(-50%) scale(1);}
+
+    /* MARQUEE REVERSE */
+    .marquee-bar--rev .marquee-bar__track{animation-direction:reverse;}
+    .marquee-bar--rev{background:var(--bg-2);border-top:1px solid var(--border);}
+    .marquee-bar--rev .marquee-bar__track span{color:var(--muted);}
+    .marquee-bar--rev .marquee-bar__track span.dot{opacity:0.2;}
+
+    /* FOOTER EGG */
+    .footer-egg{font-size:0.75rem;color:var(--muted);opacity:0;transition:opacity 0.4s;cursor:default;}
+    .footer-egg.visible{opacity:1;}
+
+    /* ─────────────────────────────────────────
+       HERO INTERACTIVE CANVAS
+    ───────────────────────────────────────── */}
+
+    /* ─────────────────────────────────────────
+       HERO HEADING — BIG REVEAL
+    ───────────────────────────────────────── */
+    .hero-heading .line {
+      display: block;
+      overflow: visible;
+      position: relative;
+    }
+    .hero-heading .line-inner {
+      display: block;
+      animation: slideUp 1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .line:nth-child(1) .line-inner{animation-delay:0.2s;}
+    .line:nth-child(2) .line-inner{animation-delay:0.4s;}
+    @keyframes slideUp{from{transform:translateY(108%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+    /* ─────────────────────────────────────────
+       LETTER HOVER EFFECT
+    ───────────────────────────────────────── */
+    .hover-char {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), color 0.25s, text-shadow 0.3s;
       cursor: default;
     }
-    .footer-egg.visible { opacity: 1; }
+    .hover-char:hover {
+      transform: translateY(-8px) scale(1.12);
+      color: var(--accent);
+      text-shadow: 0 0 40px rgba(232,115,58,0.5);
+    }
 
-    @media (max-width: 768px) {
-      .project-row__preview { display: none; }
-      #spotlight { display: none; }
+    /* ─────────────────────────────────────────
+       HERO BADGE GLITCH
+    ───────────────────────────────────────── */
+    .hero-badge {
+      position: relative; overflow: hidden;
+    }
+    .hero-badge::before {
+      content: attr(data-text);
+      position: absolute; inset: 0;
+      display: flex; align-items: center;
+      padding-left: 1.1rem;
+      color: var(--accent-warm);
+      clip-path: polygon(0 25%,100% 25%,100% 55%,0 55%);
+      transform: translateX(0);
+      opacity: 0;
+    }
+    .hero-badge:hover::before {
+      opacity: 0.5;
+      animation: badgeGlitch 0.35s steps(2) infinite;
+    }
+    @keyframes badgeGlitch{
+      0%{transform:translateX(-4px);clip-path:polygon(0 20%,100% 20%,100% 50%,0 50%);}
+      50%{transform:translateX(4px);clip-path:polygon(0 55%,100% 55%,100% 75%,0 75%);}
+      100%{transform:translateX(-2px);clip-path:polygon(0 30%,100% 30%,100% 45%,0 45%);}
+    }
+
+    /* ─────────────────────────────────────────
+       INFO CARDS REVEAL
+    ───────────────────────────────────────── */
+    .hero-card { animation: cardFloat 0.8s cubic-bezier(0.22,1,0.36,1) both; }
+    .hero-card--1{animation-delay:1.1s;}
+    .hero-card--2{animation-delay:1.3s;}
+    .hero-card--3{animation-delay:1.5s;}
+    @keyframes cardFloat{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+
+    @media(max-width:768px){
+      .project-row__preview{display:none;}
     }
   </style>
 </head>
 <body>
 
-  <!-- SCROLL PROGRESS -->
   <div id="scroll-progress"></div>
-
-  <!-- MOUSE SPOTLIGHT -->
-  <div id="spotlight"></div>
 
   <!-- NAV -->
   <header class="nav-bar">
@@ -157,59 +156,82 @@
 
   <!-- HERO -->
   <section class="hero" id="hero">
+
     <div class="hero-mesh"></div>
     <div class="hero-streak"></div>
     <div class="hero-panel"></div>
 
-    <!-- Floating geometric SVG shapes -->
-    <div class="hero-float hf-1">
-      <svg class="shape" width="70" height="70" viewBox="0 0 70 70" fill="none">
-        <rect x="10" y="10" width="50" height="50" rx="14" stroke="#e8733a" stroke-width="1.5" fill="rgba(232,115,58,0.06)"/>
-        <rect x="22" y="22" width="26" height="26" rx="8" stroke="#f0a429" stroke-width="1" fill="rgba(240,164,41,0.06)"/>
+    <!-- Technical floating icons -->
+    <div class="hero-float hf-1" data-depth="12">
+      <svg class="shape" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Terminal window -->
+        <rect x="6" y="10" width="52" height="44" rx="6"/>
+        <path d="M6 22h52"/>
+        <circle cx="16" cy="16" r="2" fill="#e8733a" opacity="0.6"/>
+        <circle cx="24" cy="16" r="2" fill="#f0a429" opacity="0.6"/>
+        <circle cx="32" cy="16" r="2" fill="rgba(232,115,58,0.3)"/>
+        <path d="M14 34l8 6-8 6" stroke-width="1.8"/>
+        <line x1="28" y1="46" x2="46" y2="46"/>
       </svg>
     </div>
-    <div class="hero-float hf-2">
-      <svg class="shape" width="60" height="60" viewBox="0 0 60 60" fill="none">
-        <circle cx="30" cy="30" r="26" stroke="#e8733a" stroke-width="1.5" fill="rgba(232,115,58,0.05)"/>
-        <circle cx="30" cy="30" r="14" stroke="#f0a429" stroke-width="1" fill="rgba(240,164,41,0.05)"/>
-        <circle cx="30" cy="30" r="4" fill="#e8733a" opacity="0.8"/>
+        <div class="hero-float hf-1" data-depth="12">
+      <svg class="shape" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="10" width="52" height="44" rx="6"/>
+        <path d="M6 22h52"/>
+        <circle cx="16" cy="16" r="2" fill="#e8733a" opacity="0.6"/>
+        <circle cx="24" cy="16" r="2" fill="#f0a429" opacity="0.5"/>
+        <circle cx="32" cy="16" r="2" fill="rgba(232,115,58,0.3)"/>
+        <path d="M14 34l8 6-8 6" stroke-width="1.8"/>
+        <line x1="28" y1="46" x2="46" y2="46"/>
       </svg>
     </div>
-    <div class="hero-float hf-3">
-      <svg class="shape" width="55" height="55" viewBox="0 0 55 55" fill="none">
-        <polygon points="27.5,4 52,50 3,50" stroke="#e8733a" stroke-width="1.5" fill="rgba(232,115,58,0.05)" stroke-linejoin="round"/>
-        <polygon points="27.5,16 44,46 11,46" stroke="#f0a429" stroke-width="1" fill="none" stroke-linejoin="round"/>
+    <div class="hero-float hf-2" data-depth="-18">
+      <svg class="shape" width="58" height="58" viewBox="0 0 58 58" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 14L6 29l14 15" stroke-width="2"/>
+        <path d="M38 14l14 15-14 15" stroke-width="2"/>
+        <line x1="34" y1="10" x2="24" y2="48" stroke="#f0a429" stroke-width="1.2" opacity="0.7"/>
       </svg>
     </div>
-    <div class="hero-float hf-4">
-      <svg class="shape" width="52" height="52" viewBox="0 0 52 52" fill="none">
-        <path d="M26 4 L48 18 L48 34 L26 48 L4 34 L4 18 Z" stroke="#e8733a" stroke-width="1.5" fill="rgba(232,115,58,0.06)"/>
-        <path d="M26 14 L40 22 L40 30 L26 38 L12 30 L12 22 Z" stroke="#fde8d0" stroke-width="1" fill="rgba(253,232,208,0.03)"/>
+    <div class="hero-float hf-3" data-depth="22">
+      <svg class="shape" width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="28" cy="14" rx="18" ry="6"/>
+        <path d="M10 14v14c0 3.3 8 6 18 6s18-2.7 18-6V14"/>
+        <path d="M10 28v14c0 3.3 8 6 18 6s18-2.7 18-6V28"/>
       </svg>
     </div>
-    <div class="hero-float hf-5">
-      <svg class="shape" width="44" height="44" viewBox="0 0 44 44" fill="none">
-        <path d="M22 2 L22 42 M2 22 L42 22 M6.4 6.4 L37.6 37.6 M37.6 6.4 L6.4 37.6" stroke="#e8733a" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
-        <circle cx="22" cy="22" r="6" fill="rgba(232,115,58,0.2)" stroke="#e8733a" stroke-width="1"/>
+    <div class="hero-float hf-4" data-depth="-14">
+      <svg class="shape" width="54" height="54" viewBox="0 0 54 54" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="14" cy="14" r="5"/>
+        <circle cx="14" cy="44" r="5"/>
+        <circle cx="40" cy="26" r="5"/>
+        <path d="M14 19v20"/>
+        <path d="M14 19c0-6 26-6 26 7"/>
+      </svg>
+    </div>
+    <div class="hero-float hf-5" data-depth="28">
+      <svg class="shape" width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="16" y="16" width="20" height="20" rx="3"/>
+        <line x1="6" y1="22" x2="16" y2="22"/><line x1="6" y1="28" x2="16" y2="28"/><line x1="6" y1="34" x2="16" y2="34"/>
+        <line x1="36" y1="22" x2="46" y2="22"/><line x1="36" y1="28" x2="46" y2="28"/><line x1="36" y1="34" x2="46" y2="34"/>
+        <line x1="22" y1="6" x2="22" y2="16"/><line x1="30" y1="6" x2="30" y2="16"/>
+        <line x1="22" y1="36" x2="22" y2="46"/><line x1="30" y1="36" x2="30" y2="46"/>
+        <circle cx="26" cy="26" r="4" fill="rgba(232,115,58,0.15)" stroke="#f0a429" stroke-width="1"/>
       </svg>
     </div>
 
-    <!-- Floating SVG shapes with parallax -->
-    
-    
-    
-    
-    <div class="hero-inner">
-      <div class="hero-badge">Computer Science & Engineering · KTH Stockholm</div>
-      <h1 class="hero-heading">
-        <span class="line"><span class="line-inner">Software</span></span>
+    <div class="hero-inner">    <div class="hero-inner">
+      <div class="hero-badge" data-text="Computer Science & Engineering · KTH Stockholm">
+        Computer Science & Engineering · KTH Stockholm
+      </div>
+      <h1 class="hero-heading" id="heroH1">
+        <span class="line"><span class="line-inner" id="splitWord">Software</span></span>
         <span class="line">
-          <span class="line-inner" id="typeTarget">Engineer</span><span class="type-cursor" id="typeCursor"></span><span class="line-inner" style="color:var(--accent)">.</span>
+          <span class="line-inner" id="typeTarget">Engineer</span><span class="type-cursor"></span><span class="line-inner" style="color:var(--accent)">.</span>
         </span>
       </h1>
       <p class="hero-sub">
         Hi, I'm <strong>Majid Makhoul</strong> - a developer crafting
-        clean, purposeful solutions. From full-stack apps to AI integrations,
+        creative solutions. From full-stack apps to AI integrations,
         I turn ideas into working products.
       </p>
       <div class="hero-actions">
@@ -218,27 +240,26 @@
       </div>
     </div>
 
-    <div class="scroll-hint">
+    <div class="scroll-hint" style="position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:5;">
       <div class="scroll-hint__line"></div>
       <span>Scroll</span>
     </div>
 
-    <!-- Floating info cards -->
-    <div class="hero-card hero-card--1">
+    <div class="hero-card hero-card--1" style="position:fixed;right:16%;top:22%;z-index:3;animation:floatA 9s ease-in-out infinite 0.5s;">
       <span class="hero-card__label">Based in</span>
       <span class="hero-card__val">Stockholm, SE</span>
     </div>
-    <div class="hero-card hero-card--2">
+    <div class="hero-card hero-card--2" style="position:fixed;right:22%;top:46%;z-index:3;animation:floatB 11s ease-in-out infinite 1.5s;">
       <span class="hero-card__label">Graduated from</span>
       <span class="hero-card__val">KTH</span>
     </div>
-    <div class="hero-card hero-card--3">
+    <div class="hero-card hero-card--3" style="position:fixed;right:14%;top:66%;z-index:3;animation:floatC 10s ease-in-out infinite 3s;">
       <span class="hero-card__label">Available for</span>
       <span class="hero-card__val">Projects & Collab</span>
     </div>
   </section>
 
-  <!-- MARQUEE (dual row) -->
+  <!-- MARQUEE -->
   <div class="marquee-bar" aria-hidden="true">
     <div class="marquee-bar__track">
       <span>Java</span><span class="dot">·</span><span>Python</span><span class="dot">·</span>
@@ -268,44 +289,32 @@
     </div>
   </div>
 
-  <!-- STATS with arc animation -->
+  <!-- STATS -->
   <section class="stats-strip">
     <div class="stat reveal" data-arc="75">
       <div class="stat-arc-wrap">
-        <svg width="72" height="72" viewBox="0 0 72 72">
-          <circle class="stat-arc-circle" cx="36" cy="36" r="30"/>
-          <circle class="stat-arc-progress" cx="36" cy="36" r="30"/>
-        </svg>
+        <svg width="72" height="72" viewBox="0 0 72 72"><circle class="stat-arc-circle" cx="36" cy="36" r="30"/><circle class="stat-arc-progress" cx="36" cy="36" r="30"/></svg>
         <span class="stat-num-inner">∞</span>
       </div>
-      <span class="stat-num" style="display:none">Always</span>
       <span class="stat-label">Always building</span>
     </div>
     <div class="stat reveal reveal-delay-1" data-arc="90">
       <div class="stat-arc-wrap">
-        <svg width="72" height="72" viewBox="0 0 72 72">
-          <circle class="stat-arc-circle" cx="36" cy="36" r="30"/>
-          <circle class="stat-arc-progress" cx="36" cy="36" r="30"/>
-        </svg>
+        <svg width="72" height="72" viewBox="0 0 72 72"><circle class="stat-arc-circle" cx="36" cy="36" r="30"/><circle class="stat-arc-progress" cx="36" cy="36" r="30"/></svg>
         <span class="stat-num-inner">10+</span>
       </div>
-      <span class="stat-num" style="display:none">10+</span>
       <span class="stat-label">Technologies mastered</span>
     </div>
     <div class="stat reveal reveal-delay-2" data-arc="100">
       <div class="stat-arc-wrap">
-        <svg width="72" height="72" viewBox="0 0 72 72">
-          <circle class="stat-arc-circle" cx="36" cy="36" r="30"/>
-          <circle class="stat-arc-progress" cx="36" cy="36" r="30"/>
-        </svg>
+        <svg width="72" height="72" viewBox="0 0 72 72"><circle class="stat-arc-circle" cx="36" cy="36" r="30"/><circle class="stat-arc-progress" cx="36" cy="36" r="30"/></svg>
         <span class="stat-num-inner">KTH</span>
       </div>
-      <span class="stat-num" style="display:none">KTH</span>
       <span class="stat-label">Royal Institute of Technology</span>
     </div>
   </section>
 
-  <!-- SERVICES with 3D tilt -->
+  <!-- SERVICES -->
   <section class="services-section">
   <div class="services-inner">
     <div class="services-header reveal">
@@ -321,47 +330,29 @@
     <div class="services-grid">
       <div class="service-card tilt-card reveal reveal-delay-1">
         <h3>Full-Stack<br><span>Development</span></h3>
-        <div class="service-card__icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="5" width="26" height="18" rx="3"/><path d="M10 28h12M16 23v5M9 12l3 3-3 3M15 18h7"/>
-          </svg>
-        </div>
+        <div class="service-card__icon"><svg viewBox="0 0 32 32" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="26" height="18" rx="3"/><path d="M10 28h12M16 23v5M9 12l3 3-3 3M15 18h7"/></svg></div>
         <p>End-to-end web and app development - React frontends, Spring Boot backends, REST APIs, and database design.</p>
       </div>
       <div class="service-card tilt-card reveal reveal-delay-2">
         <h3>Mobile<br><span>Apps</span></h3>
-        <div class="service-card__icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="9" y="2" width="14" height="28" rx="3"/><circle cx="16" cy="25" r="1.2" fill="#e8733a"/><path d="M13 6h6"/>
-          </svg>
-        </div>
+        <div class="service-card__icon"><svg viewBox="0 0 32 32" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="14" height="28" rx="3"/><circle cx="16" cy="25" r="1.2" fill="#e8733a"/><path d="M13 6h6"/></svg></div>
         <p>Cross-platform mobile applications with clean UX, real-time data, and Bluetooth sensor integrations.</p>
       </div>
       <div class="service-card tilt-card reveal reveal-delay-3">
         <h3>AI &amp;<br><span>Integrations</span></h3>
-        <div class="service-card__icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="16" cy="16" r="5"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4"/>
-            <path d="M7.05 7.05l2.83 2.83M22.12 22.12l2.83 2.83M7.05 24.95l2.83-2.83M22.12 9.88l2.83-2.83"/>
-          </svg>
-        </div>
+        <div class="service-card__icon"><svg viewBox="0 0 32 32" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="5"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4"/><path d="M7.05 7.05l2.83 2.83M22.12 22.12l2.83 2.83M7.05 24.95l2.83-2.83M22.12 9.88l2.83-2.83"/></svg></div>
         <p>Chatbots, AI-powered features, and external API integrations that turn data into intelligent experiences.</p>
       </div>
       <div class="service-card tilt-card reveal reveal-delay-4">
         <h3>Games &amp;<br><span>Interactive</span></h3>
-        <div class="service-card__icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="10" width="28" height="16" rx="4"/><path d="M10 18v-4M8 16h4"/>
-            <circle cx="22" cy="16" r="1.5" fill="#e8733a"/><circle cx="26" cy="16" r="1.5" fill="#e8733a"/>
-          </svg>
-        </div>
+        <div class="service-card__icon"><svg viewBox="0 0 32 32" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="10" width="28" height="16" rx="4"/><path d="M10 18v-4M8 16h4"/><circle cx="22" cy="16" r="1.5" fill="#e8733a"/><circle cx="26" cy="16" r="1.5" fill="#e8733a"/></svg></div>
         <p>Custom online games, interactive tools, and real-time applications with engaging user interfaces.</p>
       </div>
     </div>
   </div>
   </section>
 
-  <!-- SKILLS with tags -->
+  <!-- SKILLS -->
   <section class="skills-section-wrap">
     <div class="skills-interactive">
       <div class="skills-left">
@@ -371,7 +362,7 @@
       </div>
       <div class="skills-right">
         <div class="skill-row"><span class="skill-row__name">Java</span><span class="skill-row__tag">Backend · Enterprise</span><span class="skill-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round"><path d="M8 18s-2 1.5 1 2c3.5.8 7 .5 9-1s-3.5-2-3.5-2"/><path d="M7 15s-2 1 1 1.5c4 .8 8 .5 10-1s-4-2-4-2"/><path d="M11.5 11.5c0 0 2.5-1 2 2s-4 3.5-3 5.5"/><path d="M8 3.5s2-1 4 2-3 4-2 6 4 1 4 1"/></svg></span></div>
-        <div class="skill-row"><span class="skill-row__name">Python</span><span class="skill-row__tag">AI · Data · Scripts</span><span class="skill-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round"><path d="M12 2C8 2 7 4 7 6v2h5v1H5.5C3.5 9 2 10.5 2 13s1 5 4 5h1v-3c0-2 1-3 3-3h4c2 0 3-1 3-3V6c0-2-1-4-5-4z"/><path d="M12 22c4 0 5-2 5-4v-2h-5v-1h6.5c2 0 3.5-1.5 3.5-4s-1-5-4-5h-1v3c0 2-1 3-3 3H10c-2 0-3 1-3 3v3c0 2 1 4 5 4z"/><circle cx="10" cy="5.5" r="0.8" fill="#e8733a"/><circle cx="14" cy="18.5" r="0.8" fill="#e8733a"/></svg></span></div>
+        <div class="skill-row"><span class="skill-row__name">Python</span><span class="skill-row__tag">AI · Data · Scripts</span><span class="skill-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round"><path d="M12 2C8 2 7 4 7 6v2h5v1H5.5C3.5 9 2 10.5 2 13s1 5 4 5h1v-3c0-2 1-3 3-3h4c2 0 3-1 3-3V6c0-2-1-4-5-4z"/><path d="M12 22c4 0 5-2 5-4v-2h-5v-1h6.5c2 0 3.5-1.5 3.5-4s-1-5-4-5h-1v3c0 2-1 3-3 3H10c-2 0-3 1-3 3v3c0 2 1 4 5 4z"/></svg></span></div>
         <div class="skill-row"><span class="skill-row__name">C / C++</span><span class="skill-row__tag">Systems · Performance</span><span class="skill-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M14 8.5A4.5 4.5 0 0 0 7.5 12a4.5 4.5 0 0 0 6.5 4"/><path d="M17 10h-4M17 14h-4M15 12h4"/></svg></span></div>
         <div class="skill-row"><span class="skill-row__name">HTML & CSS</span><span class="skill-row__tag">Web · UI · Design</span><span class="skill-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round"><path d="M4 3l1.5 16L12 21l6.5-2L20 3H4z"/><path d="M8 8h8l-.5 5-3.5 1-3.5-1-.3-3h7"/></svg></span></div>
         <div class="skill-row"><span class="skill-row__name">Git</span><span class="skill-row__tag">Version Control · CI</span><span class="skill-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="#e8733a" stroke-width="1.5" stroke-linecap="round"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="6" r="2"/><path d="M6 8v8M8 6h4a4 4 0 0 1 4 4v0"/></svg></span></div>
@@ -381,81 +372,18 @@
     </div>
   </section>
 
-  <!-- PROJECTS with image preview on hover -->
+  <!-- PROJECTS -->
   <section class="projects-section">
     <div class="projects-section__header reveal">
-      <div>
-        <div class="section-label">Selected Work</div>
-        <h2>Projects</h2>
-      </div>
+      <div><div class="section-label">Selected Work</div><h2>Projects</h2></div>
       <a href="projects.html" class="btn-ghost" style="font-size:0.85rem;padding:0.7rem 1.5rem;">View All →</a>
     </div>
-
     <div class="project-list">
-      <div class="project-row reveal" data-href="projects.html">
-        <span class="project-row__num">01</span>
-        <div class="project-row__main">
-          <span class="project-row__name">WhatsNext</span>
-          <div class="project-row__tags">
-            <span class="tag tag--accent">Mobile</span><span class="tag">UX</span><span class="tag">Social</span>
-          </div>
-          <p class="project-row__desc">A mobile app where you swipe, match, and decide what to watch next with friends - real-time, social, and effortlessly fun.</p>
-        </div>
-        <div class="project-row__preview"><img src="whatsnext.png" alt="WhatsNext preview"></div>
-        <span class="project-row__arrow">↗</span>
-      </div>
-
-      <div class="project-row reveal reveal-delay-1" data-href="projects.html">
-        <span class="project-row__num">02</span>
-        <div class="project-row__main">
-          <span class="project-row__name">Safari Delivery Game</span>
-          <div class="project-row__tags">
-            <span class="tag tag--accent">Game Dev</span><span class="tag">Java</span>
-          </div>
-          <p class="project-row__desc">An interactive online game built from the ground up - custom game engine, real-time mechanics, and animated characters.</p>
-        </div>
-        <div class="project-row__preview"><img src="startMenyn.png" alt="Game preview"></div>
-        <span class="project-row__arrow">↗</span>
-      </div>
-
-      <div class="project-row reveal reveal-delay-2" data-href="projects.html">
-        <span class="project-row__num">03</span>
-        <div class="project-row__main">
-          <span class="project-row__name">SMHI Weather App</span>
-          <div class="project-row__tags">
-            <span class="tag tag--accent">API</span><span class="tag">Data</span>
-          </div>
-          <p class="project-row__desc">Real-time weather forecasts for any Swedish location, powered by SMHI's official meteorological API.</p>
-        </div>
-        <div class="project-row__preview"><img src="SMHI1.png" alt="SMHI preview"></div>
-        <span class="project-row__arrow">↗</span>
-      </div>
-
-      <div class="project-row reveal reveal-delay-3" data-href="projects.html">
-        <span class="project-row__num">04</span>
-        <div class="project-row__main">
-          <span class="project-row__name">Bluetooth Movement Elevation</span>
-          <div class="project-row__tags">
-            <span class="tag tag--accent">Mobile</span><span class="tag">Bluetooth</span><span class="tag">Sensors</span>
-          </div>
-          <p class="project-row__desc">Connects to Movesense sensors via Bluetooth to measure and visualize movement and elevation data in real-time.</p>
-        </div>
-        <div class="project-row__preview"><img src="IMG_1229.PNG" alt="Bluetooth preview"></div>
-        <span class="project-row__arrow">↗</span>
-      </div>
-
-      <div class="project-row reveal reveal-delay-4" data-href="projects.html">
-        <span class="project-row__num">05</span>
-        <div class="project-row__main">
-          <span class="project-row__name">AI Chatbot</span>
-          <div class="project-row__tags">
-            <span class="tag tag--accent">AI</span><span class="tag">Java</span>
-          </div>
-          <p class="project-row__desc">An interactive chatbot built with Java, featuring natural language conversation and AI-powered responses.</p>
-        </div>
-        <div class="project-row__preview"><img src="Chatbot.png" alt="Chatbot preview"></div>
-        <span class="project-row__arrow">↗</span>
-      </div>
+      <div class="project-row reveal" data-href="projects.html"><span class="project-row__num">01</span><div class="project-row__main"><span class="project-row__name">WhatsNext</span><div class="project-row__tags"><span class="tag tag--accent">Mobile</span><span class="tag">UX</span><span class="tag">Social</span></div><p class="project-row__desc">A mobile app where you swipe, match, and decide what to watch next with friends - real-time, social, and effortlessly fun.</p></div><div class="project-row__preview"><img src="whatsnext.png" alt="WhatsNext"></div><span class="project-row__arrow">↗</span></div>
+      <div class="project-row reveal reveal-delay-1" data-href="projects.html"><span class="project-row__num">02</span><div class="project-row__main"><span class="project-row__name">Safari Delivery Game</span><div class="project-row__tags"><span class="tag tag--accent">Game Dev</span><span class="tag">Java</span></div><p class="project-row__desc">An interactive online game built from the ground up - custom game engine, real-time mechanics, and animated characters.</p></div><div class="project-row__preview"><img src="startMenyn.png" alt="Game"></div><span class="project-row__arrow">↗</span></div>
+      <div class="project-row reveal reveal-delay-2" data-href="projects.html"><span class="project-row__num">03</span><div class="project-row__main"><span class="project-row__name">Tender Flow Automation</span><div class="project-row__tags"><span class="tag tag--accent">AI / LLM</span><span class="tag">Python</span><span class="tag">RAG</span></div><p class="project-row__desc">Automated tender and proposal workflows in the consultancy industry using AI-based pipelines and LLM approaches.</p></div><span class="project-row__arrow">↗</span></div>
+      <div class="project-row reveal reveal-delay-3" data-href="projects.html"><span class="project-row__num">04</span><div class="project-row__main"><span class="project-row__name">Internal Event Service</span><div class="project-row__tags"><span class="tag tag--accent">Full-Stack</span><span class="tag">REST API</span><span class="tag">Agile</span></div><p class="project-row__desc">Built a digital solution for internal process management with booking flows, event handling and database integrations.</p></div><span class="project-row__arrow">↗</span></div>
+      <div class="project-row reveal reveal-delay-4" data-href="projects.html"><span class="project-row__num">05</span><div class="project-row__main"><span class="project-row__name">AI Chatbot</span><div class="project-row__tags"><span class="tag tag--accent">AI</span><span class="tag">Java</span></div><p class="project-row__desc">An interactive chatbot built with Java, featuring natural language conversation and AI-powered responses.</p></div><div class="project-row__preview"><img src="Chatbot.png" alt="Chatbot"></div><span class="project-row__arrow">↗</span></div>
     </div>
     <div class="projects-cta">
       <a href="projects.html" class="btn-primary btn-magnetic">See All Projects →</a>
@@ -476,7 +404,7 @@
   </section>
 
   <footer class="site-footer">
-    <span>© 2025 Majid Makhoul · Stockholm, Sweden</span>
+    <span>© 2026 Majid Makhoul · Stockholm, Sweden</span>
     <span class="footer-egg" id="footerEgg">Built with caffeine & curiosity ☕</span>
     <div class="footer-links">
       <a href="https://github.com/Majdmkl" target="_blank"><i class="fa-brands fa-github"></i></a>
@@ -486,45 +414,48 @@
   </footer>
 
   <script>
-  /* ============================================================
-     1. SCROLL PROGRESS BAR
-  ============================================================ */
-  const progressBar = document.getElementById('scroll-progress');
+  /* ── SCROLL PROGRESS + HIDE CARDS ON SCROLL ── */
+  const prog = document.getElementById('scroll-progress');
+  const heroCards = document.querySelectorAll('.hero-card');
   window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    progressBar.style.width = pct + '%';
-  }, { passive: true });
+    prog.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
+    const heroH = document.getElementById('hero').offsetHeight;
+    heroCards.forEach(c => {
+      c.style.opacity = window.scrollY > heroH * 0.5 ? '0' : '1';
+      c.style.pointerEvents = window.scrollY > heroH * 0.5 ? 'none' : 'none';
+    });
+  }, {passive:true});
 
-  /* ============================================================
-     2. MOUSE SPOTLIGHT
-  ============================================================ */
-  const spotlight = document.getElementById('spotlight');
-  window.addEventListener('mousemove', e => {
-    spotlight.style.setProperty('--mx', e.clientX + 'px');
-    spotlight.style.setProperty('--my', e.clientY + 'px');
-  }, { passive: true });
+  /* ── GLOBAL MOUSE ── */
+  let MX = window.innerWidth/2, MY = window.innerHeight/2;
+  window.addEventListener('mousemove', e => { MX = e.clientX; MY = e.clientY; }, {passive:true});
 
-  /* canvas removed */
+  
 
-  /* ============================================================
-     4. HERO FLOAT PARALLAX
-  ============================================================ */
-  window.addEventListener('mousemove', e => {
+  /* ── HERO FLOAT PARALLAX ── */
+  window.addEventListener('mousemove', () => {
     const cx = window.innerWidth/2, cy = window.innerHeight/2;
-    const dx = (e.clientX-cx)/cx, dy = (e.clientY-cy)/cy;
-    const depths = [12, -18, 22, -14, 28];
-    document.querySelectorAll('.hero-float').forEach((f,i) => {
-      const d = depths[i] || 10;
+    const dx = (MX-cx)/cx, dy = (MY-cy)/cy;
+    document.querySelectorAll('.hero-float[data-depth]').forEach(f => {
+      const d = +f.dataset.depth;
       f.style.transform = `translate(${dx*d}px,${dy*d*0.6}px)`;
     });
-  }, { passive: true });
+  }, {passive:true});
 
-  /* ============================================================
-     5. TYPING ANIMATION in hero
-  ============================================================ */
+  /* ── LETTER HOVER SPLIT on "Software" ── */
+  (function() {
+    const el = document.getElementById('splitWord');
+    if (!el) return;
+    const text = el.textContent;
+    el.innerHTML = text.split('').map((ch, i) =>
+      `<span class="hover-char" style="animation-delay:${i*0.04}s">${ch}</span>`
+    ).join('');
+  })();
+
+  /* ── TYPING ANIMATION ── */
   (function() {
     const el = document.getElementById('typeTarget');
-    const cursor = document.getElementById('typeCursor');
+    if (!el) return;
     const words = ['Engineer', 'Builder', 'Developer', 'Creator', 'Engineer'];
     let wi=0, ci=0, deleting=false, showDots=false;
     function tick() {
@@ -533,152 +464,85 @@
         el.textContent = word.slice(0, ci+1);
         ci++;
         if (ci === word.length) {
-          // Show "..." then pause then delete
-          showDots = true;
-          el.textContent = word + '...';
-          deleting = true;
-          ci = word.length + 3; // account for dots
-          setTimeout(tick, 1600); return;
+          showDots=true; el.textContent=word+'...'; deleting=true; ci=word.length+3;
+          setTimeout(tick,1600); return;
         }
-        setTimeout(tick, 95);
+        setTimeout(tick,95);
       } else {
-        // Delete dots first, then word
-        if (showDots && ci > words[wi].length) {
-          const dotsLeft = ci - words[wi].length;
-          el.textContent = words[wi] + '.'.repeat(dotsLeft - 1);
-          ci--;
-          setTimeout(tick, 60); return;
+        if (showDots && ci>words[wi].length) {
+          el.textContent=words[wi]+'.'.repeat(ci-words[wi].length-1); ci--;
+          setTimeout(tick,60); return;
         }
-        showDots = false;
-        el.textContent = words[wi].slice(0, ci - 1);
-        ci--;
-        if (ci === 0) {
-          deleting = false;
-          wi = (wi+1) % words.length;
-          setTimeout(tick, 350); return;
-        }
-        setTimeout(tick, 55);
+        showDots=false; el.textContent=words[wi].slice(0,ci-1); ci--;
+        if (ci===0){ deleting=false; wi=(wi+1)%words.length; setTimeout(tick,350); return; }
+        setTimeout(tick,55);
       }
     }
-    setTimeout(tick, 2200);
+    setTimeout(tick,2200);
   })();
 
-  /* ============================================================
-     6. MAGNETIC BUTTONS
-  ============================================================ */
-  document.querySelectorAll('.btn-magnetic').forEach(wrap => {
-    wrap.addEventListener('mousemove', e => {
-      const r = wrap.getBoundingClientRect();
-      const x = e.clientX - r.left - r.width/2;
-      const y = e.clientY - r.top - r.height/2;
-      wrap.style.transform = `translate(${x*0.22}px,${y*0.22}px)`;
+  /* ── MAGNETIC BUTTONS ── */
+  document.querySelectorAll('.btn-magnetic').forEach(w => {
+    w.addEventListener('mousemove', e => {
+      const r = w.getBoundingClientRect();
+      w.style.transform = `translate(${(e.clientX-r.left-r.width/2)*0.22}px,${(e.clientY-r.top-r.height/2)*0.22}px)`;
     });
-    wrap.addEventListener('mouseleave', () => {
-      wrap.style.transform = '';
-      wrap.style.transition = 'transform 0.5s cubic-bezier(0.22,1,0.36,1)';
-      setTimeout(() => wrap.style.transition = '', 500);
+    w.addEventListener('mouseleave', () => {
+      w.style.transition='transform 0.5s cubic-bezier(0.22,1,0.36,1)';
+      w.style.transform='';
+      setTimeout(()=>w.style.transition='',500);
     });
   });
 
-  /* ============================================================
-     7. 3D TILT ON SERVICE CARDS
-  ============================================================ */
+  /* ── 3D CARD TILT ── */
   document.querySelectorAll('.tilt-card').forEach(card => {
     card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      const rx = -y * 10, ry = x * 10;
-      // also update glow
-      card.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
-      card.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%');
-      card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px) scale(1.02)`;
-      card.style.boxShadow = `${-ry*1.5}px ${rx*1.5}px 40px rgba(232,115,58,0.25)`;
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
+      card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+      card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+      card.style.transform=`perspective(800px) rotateX(${-y*10}deg) rotateY(${x*10}deg) translateY(-6px) scale(1.02)`;
+      card.style.boxShadow=`${-x*15}px ${y*15}px 40px rgba(232,115,58,0.25)`;
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-      card.style.boxShadow = '';
-    });
+    card.addEventListener('mouseleave',()=>{ card.style.transform=''; card.style.boxShadow=''; });
   });
 
-  /* ============================================================
-     8. STAT ARC ANIMATION
-  ============================================================ */
-  const CIRCUMFERENCE = 2 * Math.PI * 30; // r=30
-  const statObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const stat = entry.target;
-      const arc = +stat.dataset.arc || 80;
-      const circle = stat.querySelector('.stat-arc-progress');
-      if (circle && !circle.dataset.animated) {
-        circle.dataset.animated = '1';
-        const offset = CIRCUMFERENCE * (1 - arc/100);
-        setTimeout(() => { circle.style.strokeDashoffset = offset; }, 100);
-      }
-      statObs.unobserve(stat);
-    });
-  }, { threshold: 0.4 });
-  document.querySelectorAll('.stat[data-arc]').forEach(s => statObs.observe(s));
+  /* ── STAT ARC ── */
+  const CIRC = 2*Math.PI*30;
+  document.querySelectorAll('.stat[data-arc]').forEach(s => {
+    new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      const c = s.querySelector('.stat-arc-progress');
+      if (c && !c.dataset.done) { c.dataset.done='1'; setTimeout(()=>{ c.style.strokeDashoffset=CIRC*(1-(+s.dataset.arc||80)/100); },120); }
+    },{threshold:0.4}).observe(s);
+  });
 
-  /* ============================================================
-     9. PROJECT ROW ACCORDION + NAVIGATE
-  ============================================================ */
+  /* ── PROJECT ACCORDION ── */
   document.querySelectorAll('.project-row').forEach(row => {
     row.addEventListener('click', () => {
-      const wasOpen = row.classList.contains('open');
-      document.querySelectorAll('.project-row.open').forEach(r => r.classList.remove('open'));
-      if (!wasOpen) row.classList.add('open');
+      const was = row.classList.contains('open');
+      document.querySelectorAll('.project-row.open').forEach(r=>r.classList.remove('open'));
+      if (!was) row.classList.add('open');
     });
   });
 
-  /* ============================================================
-     10. CONTACT ORB follows mouse inside section
-  ============================================================ */
-  const ctaSection = document.getElementById('contactCta');
-  const ctaOrb = document.getElementById('ctaOrb');
-  ctaSection && ctaSection.addEventListener('mousemove', e => {
-    const r = ctaSection.getBoundingClientRect();
-    const x = e.clientX - r.left, y = e.clientY - r.top;
-    ctaOrb.style.left = x + 'px';
-    ctaOrb.style.top  = y + 'px';
-    ctaOrb.style.transform = 'translate(-50%,-50%)';
-  });
-  ctaSection && ctaSection.addEventListener('mouseleave', () => {
-    ctaOrb.style.left = '50%'; ctaOrb.style.top = '50%';
-    ctaOrb.style.transform = 'translate(-50%,-50%)';
-  });
+  /* ── CONTACT ORB ── */
+  const ctaSec=document.getElementById('contactCta'), ctaOrb=document.getElementById('ctaOrb');
+  if(ctaSec&&ctaOrb){
+    ctaSec.addEventListener('mousemove',e=>{const r=ctaSec.getBoundingClientRect();ctaOrb.style.cssText+=`;left:${e.clientX-r.left}px;top:${e.clientY-r.top}px;transform:translate(-50%,-50%)`;});
+    ctaSec.addEventListener('mouseleave',()=>{ctaOrb.style.left='50%';ctaOrb.style.top='50%';ctaOrb.style.transform='translate(-50%,-50%)';});
+  }
 
-  /* ============================================================
-     11. SCROLL REVEAL
-  ============================================================ */
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  /* ── SCROLL REVEAL ── */
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-  /* ============================================================
-     12. HAMBURGER
-  ============================================================ */
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('open');
-  });
+  /* ── HAMBURGER ── */
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
 
-  /* ============================================================
-     13. FOOTER EASTER EGG (Konami code)
-  ============================================================ */
-  const konami = [38,38,40,40,37,39,37,39,66,65];
-  let ki = 0;
-  document.addEventListener('keydown', e => {
-    if (e.keyCode === konami[ki]) {
-      ki++;
-      if (ki === konami.length) {
-        document.getElementById('footerEgg').classList.add('visible');
-        ki = 0;
-      }
-    } else ki = 0;
-  });
-
+  /* ── KONAMI ── */
+  const k=[38,38,40,40,37,39,37,39,66,65]; let ki=0;
+  document.addEventListener('keydown',e=>{ if(e.keyCode===k[ki]){ki++;if(ki===k.length){document.getElementById('footerEgg').classList.add('visible');ki=0;}}else ki=0; });
   </script>
 </body>
 </html>
