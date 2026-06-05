@@ -1,49 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact - Majid Makhoul</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header>
-    <div class="logo"><a href="index.html">mmakhoul.com</a></div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
+  <header class="nav-bar">
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html" class="active">Contact</a>
     </nav>
+    <a href="contact.html" class="nav-cta">Get in touch</a>
+    <button class="hamburger" id="hamburger">&#9776;</button>
   </header>
 
-  <section id="contact-page">
-    <h2>📩 Contact Me</h2>
-    <form action="https://formspree.io/f/xpwjkllv" method="POST" class="contact-form">
-      <label>
-        Your Name:
-        <input type="text" name="name" placeholder="Enter your name" required />
-      </label>
-      <label>
-        Your Email:
-        <input type="email" name="email" placeholder="Enter your email" required />
-      </label>
-      <label>
-        Your Message:
-        <textarea name="message" placeholder="Write your message here..." required></textarea>
-      </label>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-
-    <div class="other-contacts">
-      <h3>Other ways to connect</h3>
-      <p>📍 Based in: Stockholm, Sweden</p>
-      <p>Email: <a href="mailto:majid.makhoul.04@hotmail.se">majid.makhoul.04@hotmail.se</a></p>
-      <p>GitHub: <a href="https://github.com/Majdmkl" target="_blank">My GitHub</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/majid-makhoul-b61232289/" target="_blank">My LinkedIn</a></p>
+  <div class="contact-page">
+    <div class="section-label">Get in Touch</div>
+    <h1 style="font-family:var(--font-head);font-weight:800;font-size:clamp(2.8rem,7vw,5rem);letter-spacing:-0.045em;line-height:0.95;margin-bottom:0.9rem;">
+      Let's <span style="color:var(--accent)">Connect</span>
+    </h1>
+    <p style="color:var(--muted);font-size:1rem;margin-bottom:2.8rem;max-width:420px;line-height:1.75;">
+      Have a project in mind, want to collaborate, or just want to say hello? Send me a message.
+    </p>
+    <div class="contact-form-wrap reveal">
+      <form action="https://formspree.io/f/xpwjkllv" method="POST">
+        <label>Your Name<input type="text" name="name" placeholder="John Doe" required/></label>
+        <label>Your Email<input type="email" name="email" placeholder="john@example.com" required/></label>
+        <label>Message<textarea name="message" placeholder="Tell me about your project or idea..." required></textarea></label>
+        <button type="submit" class="btn-primary" style="align-self:flex-start;border:none;cursor:pointer;">Send Message →</button>
+      </form>
     </div>
-  </section>
+    <div style="margin-top:2rem;" class="reveal reveal-delay-1">
+      <div class="section-label" style="margin-bottom:1rem;">Other ways to reach me</div>
+      <div class="contact-links">
+        <a href="mailto:majid.makhoul.04@hotmail.se" class="contact-link-card"><strong>Email</strong>majid.makhoul.04@hotmail.se</a>
+        <a href="https://github.com/Majdmkl" target="_blank" class="contact-link-card"><strong><i class="fa-brands fa-github"></i> GitHub</strong>github.com/Majdmkl</a>
+        <a href="https://www.linkedin.com/in/majid-makhoul-b61232289/" target="_blank" class="contact-link-card"><strong><i class="fa-brands fa-linkedin"></i> LinkedIn</strong>Majid Makhoul</a>
+        <div class="contact-link-card" style="cursor:default;"><strong>Location</strong>Stockholm, Sweden</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span>© 2025 Majid Makhoul · Stockholm, Sweden</span>
+    <div class="footer-links">
+      <a href="https://github.com/Majdmkl" target="_blank"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/majid-makhoul-b61232289/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+    </div>
+  </footer>
+  <script>
+    const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+  </script>
 </body>
 </html>
